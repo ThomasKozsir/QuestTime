@@ -12,5 +12,6 @@ public final class QuestContract {
         public static final String TABLE_NAME = "Quests";
         public static final String COLUMN_NAME_TITLE = "title";
         public static final String COLUMN_DATE = "created";
+        static final String COLUMN_STATUS = "status";
     }
 }

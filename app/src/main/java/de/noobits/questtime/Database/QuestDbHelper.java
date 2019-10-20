@@ -8,17 +8,20 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.Date;
 
 import de.noobits.questtime.Database.QuestContract.Quest;
+import de.noobits.questtime.R;
 
 public class QuestDbHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "questDatabase";
-    public static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "questDatabase";
+    private static final int DATABASE_VERSION = 1;
     private SQLiteDatabase db;
 
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + Quest.TABLE_NAME + "(" +
                     Quest._ID + " INTEGER PRIMARY KEY," +
                     Quest.COLUMN_NAME_TITLE + " TEXT, " +
-                    Quest.COLUMN_DATE + " TEXT)";
+                    Quest.COLUMN_DATE + " TEXT," +
+                    Quest.COLUMN_STATUS + " TEXT)"
+            ;
 
     private static final String  SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + Quest.TABLE_NAME;
@@ -46,6 +49,7 @@ public class QuestDbHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(Quest.COLUMN_NAME_TITLE, name);
         values.put(Quest.COLUMN_DATE, new Date().toString());
+        values.put(Quest.COLUMN_STATUS, Status.OPEN.toString());
 
         return this.getWritableDatabase().insert(Quest.TABLE_NAME, null, values);
     }
